@@ -1,9 +1,14 @@
-<%= form_for @user, url: login_path, method: :post do |f| %>
-  <%= f.label :username %>
-  <%= f.text_field :username %><br>
+<h1>Login or Create New User</h1>
 
-  <%= f.label :password %>
-  <%= f.password_field :password %><br>
+<% if flash[:errors] %>
+  <h4><%= flash[:errors] %></h4>
+<% end %>
 
-  <%= f.submit "log in", class: "btn btn-primary" %> or <%= link_to(controller: 'users', action: 'new') { 'sign up' } %>
+<%= form_tag sessions_path do %>
+  <%= label_tag :username %>
+  <%= text_field_tag :username %><br>
+  <%= label_tag :password %>
+  <%= password_field_tag :password %><br>
+
+  <%= submit_tag "log in", class: "btn btn-primary" %> or <%= link_to(controller: 'users', action: 'new') { 'sign up' } %>
 <% end %>

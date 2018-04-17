@@ -31,8 +31,10 @@
               <a class="nav-link" href="#">Exercises</a>
             </li>
           </ul>
-          <%= form_tag logout_path, class: "form-inline my-2 my-lg-0" do %>
-            <input type=submit value='logout' class='btn btn-outline-light my-2 my-sm-0'>
+          <% if session[:user_id] %>
+            <%= form_tag logout_path, class: "form-inline my-2 my-lg-0" do %>
+              <input type=submit value='logout' class='btn btn-outline-light my-2 my-sm-0'>
+            <% end %>
           <% end %>
         </div>
       </nav>

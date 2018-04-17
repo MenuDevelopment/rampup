@@ -1,0 +1,8 @@
+<%= @workout.name %>
+
+<%= @workout.day.strftime("Workout created on %m/%d/%Y") %>
+
+
+<% @workout.exercises.each do |exercise| %>
+<%= exercise.name %>
+<% end %>

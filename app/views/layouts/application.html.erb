@@ -31,14 +31,14 @@
               <a class="nav-link" href="#">Exercises</a>
             </li>
           </ul>
-          <% if session[:user_id] %>
+          <% if logged_in? %>
             <%= form_tag logout_path, class: "form-inline my-2 my-lg-0" do %>
               <input type=submit value='logout' class='btn btn-outline-light my-2 my-sm-0'>
             <% end %>
-            <% else %>
-              <%= form_tag '/login', method: 'get', class: "form-inline my-2 my-lg-0" do %>
-                <input type=submit value='login' class='btn btn-outline-light my-2 my-sm-0'>
-              <% end %>
+          <% else %>
+            <%= form_tag login_path, class: "form-inline my-2 my-lg-0" do %>
+              <input type=submit value='login' class='btn btn-outline-light my-2 my-sm-0'>
+            <% end %>
           <% end %>
         </div>
       </nav>

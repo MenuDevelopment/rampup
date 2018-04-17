@@ -4,12 +4,11 @@
   <h4><%= flash[:errors] %></h4>
 <% end %>
 
-<%= form_for @user, url: login_path, method: :post do |f| %>
-  <%= f.label :username %>
-  <%= f.text_field :username %><br>
+<%= form_tag sessions_path do %>
+  <%= label_tag :username %>
+  <%= text_field_tag :username %><br>
+  <%= label_tag :password %>
+  <%= password_field_tag :password %><br>
 
-  <%= f.label :password %>
-  <%= f.password_field :password %><br>
-
-  <%= f.submit "log in", class: "btn btn-primary" %> or <%= link_to(controller: 'users', action: 'new') { 'sign up' } %>
+  <%= submit_tag "log in", class: "btn btn-primary" %> or <%= link_to(controller: 'users', action: 'new') { 'sign up' } %>
 <% end %>

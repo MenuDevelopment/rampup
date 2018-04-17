@@ -9,11 +9,14 @@ class FriendshipsController < ApplicationController
         flash[:error] = "Error occurred when adding friend."
         redirect_to users_url
       end
-    else
-      flash[:notice] = "You have already added this user as a friend."
-      redirect_to users_url
+    # else
+    #   flash[:notice] = "You have already added this user as a friend."
+    #   redirect_to users_url
     end
   end
+
+  def index
+  end 
 
   def destroy
     # byebug

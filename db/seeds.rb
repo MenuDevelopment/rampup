@@ -35,8 +35,11 @@ Exercise.create(name: "Wii Tennis", description: "Try to tell me this isn't exer
 
 #sample users
 10.times do
-  User.create(first_name: Faker::Name.unique.first_name , last_name: Faker::Name.unique.last_name , age: 20, height: 68, weight: 160 , email: Faker::Internet.email , password: Faker::Internet.password )
+  curr_password = "password1"
+  User.create(first_name: Faker::Name.unique.first_name, last_name: Faker::Name.unique.last_name, age: 20, height: "5'4", weight: 150.0, username: Faker::Internet.user_name, email: Faker::Internet.email, password: curr_password, password_confirmation: curr_password)
 end
+
+User.create(first_name: "testy", last_name: "tester", age: 20, height: "5'4", weight: 150.0, username: "testaccount", email: "testaccount@fake.com", password: "password1", password_confirmation: "password1")
 
 #sample workouts
 User.all.each do |user|

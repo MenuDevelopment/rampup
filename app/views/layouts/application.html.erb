@@ -6,9 +6,20 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
   </head>
 
   <body>
-    <%= yield %>
+    <div class="container">
+
+      <nav class="navbar navbar-light bg-light">
+        <span class="navbar-brand mb-0 h1">RAMPUP</span>
+        <%= form_tag logout_path, method: "post" do %>
+          <input type=submit value='logout' class='btn btn-light'>
+        <% end %>
+      </nav>
+      <%= yield %>
+    </div>
   </body>
 </html>

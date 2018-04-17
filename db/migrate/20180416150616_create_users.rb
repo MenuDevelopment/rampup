@@ -5,10 +5,10 @@ class CreateUsers < ActiveRecord::Migration[5.1]
       t.string :last_name
       t.string :email
       t.string :username
-      t.string :password
-      t.float :weight
+      t.string :password_digest
+      t.integer :weight
       t.integer :age
-      t.integer :height
+      t.string :height
 
       t.timestamps
     end

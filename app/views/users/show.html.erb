@@ -4,7 +4,7 @@
   <p>HI this is you!</p>
   <p>user profile editing functionality goes here</p>
 
-  <h3>My Friends</h3>
+  <h3>Friends</h3>
 
   <% if flash[:notice] %>
     <p><%= flash[:notice] %></p>
@@ -20,5 +20,12 @@
     <% end %>
 
   </ul>
+
+  <% else %>
+    <% if @user.friendships != [] %>
+      <% @user.friendships.each do |f| %>
+        <li><%= link_to f.friend.username, f.friend %></li>
+      <% end %>
+    <% end %>
 
 <% end %>

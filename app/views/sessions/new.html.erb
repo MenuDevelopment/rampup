@@ -1,5 +1,9 @@
 <h1>Login or Create New User</h1>
 
+<% if flash[:errors] %>
+  <h4><%= flash[:errors] %></h4>
+<% end %>
+
 <%= form_for @user, url: login_path, method: :post do |f| %>
   <%= f.label :username %>
   <%= f.text_field :username %><br>

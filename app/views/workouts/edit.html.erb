@@ -1,4 +1,4 @@
-<h3> Create a new workout! </h3>
+<h3> Edit exisiting workout! </h3>
 
 <% if flash[:errors] %>
   <% flash[:errors].each do |error| %>
@@ -14,6 +14,12 @@
  <%=f.label :day %>
 <%= f.date_field :day %><br><br>
 <%= f.collection_check_boxes :exercise_ids, @exercises, :id, :name %> <br><br>
+
+
+<%= fields_for "exercise_workouts[]" do |ff| %>
+<%= ff.label :reps %>
+<% end %>
+
 <%= f.submit %>
 
 

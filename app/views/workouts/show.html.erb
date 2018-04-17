@@ -1,8 +1,8 @@
-<%= @workout.name %>
+<h1><%= @workout.name %></h1>
 
-<%= @workout.day.strftime("Workout created on %m/%d/%Y") %>
+<h3><%= @workout.day.strftime("I worked out on %m/%d/%Y") %></h3><br>
 
 
 <% @workout.exercises.each do |exercise| %>
-<%= exercise.name %>
+<%= link_to exercise.name, exercise %><br>
 <% end %>

@@ -1,6 +1,10 @@
 class UsersController < ApplicationController
   before_action :user_params, only: [:create, :edit, :update]
 
+  def index
+    @users = User.all
+  end
+
   def new
     @user = User.new
     # @heights = (56..112).to_a.map { |inch| { id: inch.to_s, name: (inch/12).floor.to_s+'\''+(inch%12).to_s } }
@@ -18,6 +22,10 @@ class UsersController < ApplicationController
       flash[:errors] = @user.errors.full_messages
       redirect_to new_user_path
     end
+  end
+
+  def show
+    @user = User.find(params[:id])
   end
 
   private

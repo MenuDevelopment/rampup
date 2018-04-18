@@ -1,6 +1,7 @@
 class WorkoutsController < ApplicationController
   before_action :require_logged_in
   before_action :set_workout, only: [:show, :edit, :update]
+  before_action :require_self_or_friendship, only: :show
 
   def index
     @workouts = Workout.all
@@ -41,7 +42,6 @@ class WorkoutsController < ApplicationController
 
 
   def show
-    require_self_or_friendship
   end
 
   private

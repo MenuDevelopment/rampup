@@ -1,6 +1,6 @@
 <h1><%= @workout.name %></h1>
 
-<h3><%= @workout.day.strftime("I worked out on %m/%d/%Y") if @workout.day %></h3><br>
+<h3><%= "#{@workout.user.username} worked out " %><%= @workout.day.strftime("on %m/%d/%Y") if @workout.day %></h3><br>
 
 <% @workout.exercise_workouts.each do |e_w| %>
   <% exercise = e_w.exercise %>
@@ -12,4 +12,6 @@
   <br>
 <% end %>
 
-<a role="button" href="<%=edit_workout_path(@workout) %>" class="btn btn-light">Edit this workout</a>
+<% if @workout.user == current_user %>
+  <a role="button" href="<%=edit_workout_path(@workout) %>" class="btn btn-light">Edit this workout</a>
+<% end %>

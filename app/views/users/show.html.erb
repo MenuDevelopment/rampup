@@ -3,7 +3,6 @@
 <% if @user == current_user %>
   <a role="button" href="<%= edit_user_path %>" class="btn btn-primary btn-sm">Edit Account</a>
 
-
 <hr>
 
 <h3> Ramp Up Stats </h3>
@@ -41,8 +40,8 @@ Trending Exercises:
     </ul>
   <% end %>
 
-<% if @user.friends != [] %>
-  Followers:
+<% if @user.inverse_friends != [] %>
+  <h3>Followers:</h3>
     <ul>
       <% @user.inverse_friends.each do |f| %>
         <li><%= link_to f.username, f %></li>

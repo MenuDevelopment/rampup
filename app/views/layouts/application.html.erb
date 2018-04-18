@@ -13,13 +13,40 @@
   <body>
     <div class="container">
 
-      <nav class="navbar navbar-light bg-light">
-        <span class="navbar-brand mb-0 h1">RAMPUP</span>
-        <%= form_tag logout_path, method: "post" do %>
-          <input type=submit value='logout' class='btn btn-light'>
-        <% end %>
+      <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <a class="navbar-brand" href="#">RAMPUP</a>
+
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+          <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+            <li class="nav-item active">
+              <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Workouts</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Exercises</a>
+            </li>
+          </ul>
+          <% if logged_in? %>
+            <%= form_tag logout_path, class: "form-inline my-2 my-lg-0" do %>
+              <input type=submit value='logout' class='btn btn-outline-light my-2 my-sm-0'>
+            <% end %>
+          <% else %>
+            <%= form_tag '/login', method: 'get', class: "form-inline my-2 my-lg-0" do %>
+              <input type=submit value='login' class='btn btn-outline-light my-2 my-sm-0'>
+            <% end %>
+          <% end %>
+        </div>
       </nav>
-      <%= yield %>
+
+      <div class="jumbotron">
+        <%= yield %>
+      </div>
+
     </div>
   </body>
 </html>

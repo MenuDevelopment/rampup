@@ -11,11 +11,18 @@ class User < ApplicationRecord
   validates :age, numericality: {only_integer: true, greater_than_or_equal_to: 13, less_than_or_equal_to: 120}
 
   has_many :friendships
-  has_many :friends, through: :friendships
+  has_many :friends, :through => :friendships
+  has_many :inverse_friendships, :class_name => "Friendship", :foreign_key => "friend_id"
+  has_many :inverse_friends, :through => :inverse_friendships, :source => :user
   has_many :workouts
   has_many :exercise_workouts, through: :workouts
   has_many :memberships
   has_many :gyms, through: :memberships
 
   has_secure_password
+
+  def full_name
+    "#{self.first_name} #{self.last_name}"
+  end
+
 end

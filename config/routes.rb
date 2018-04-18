@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   resources :workouts
   resources :exercises
   resources :users, only: [:index, :show, :create, :edit, :update, :destroy]
+  resources :friendships
 
   get "signup", to: "users#new", as: "signup"
   get '/login', to: 'sessions#new', as: "login"

@@ -1,0 +1,21 @@
+<h3> Create a new workout! </h3>
+
+<% if flash[:errors] %>
+  <% flash[:errors].each do |error| %>
+    <%= error %>
+  <% end %>
+<% end %>
+
+<%= form_for @workout do |f| %>
+  <%= f.label :name %> of workout:
+  <%= f.text_field :name %> <br><br>
+  <%=f.label :day %>
+  <%= f.date_field :day %><br><br>
+  <%= f.collection_check_boxes :exercise_ids, @exercises, :id, :name do |b| %>
+      <%= b.label class:"label-checkbox" do%>
+        <%=b.check_box + b.text%>
+      <%end%>
+    <% end %>
+  <br><br>
+  <%= f.submit %>
+<% end %>

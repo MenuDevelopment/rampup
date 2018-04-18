@@ -1,0 +1,38 @@
+<h1> How'd your work out go? </h1>
+
+<% if flash[:errors] %>
+  <% flash[:errors].each do |error| %>
+    <%= error %>
+  <% end %>
+<% end %>
+
+<%= form_for @workout do |f| %>
+  <%= f.label :name %> of workout:
+  <%= f.text_field :name %> <br><br>
+  <%= f.label :day %>
+  <%= f.date_field :day %><br><br>
+
+  <%= f.fields_for :exercise_workouts do |i| %>
+    <% if i.object.persisted? %>
+      <% category = i.object.exercise.category %>
+      <h4><%= i.object.exercise.name %></h4>
+      <% if category == "strength" %>
+        <%= i.label :reps %>
+        <%= i.text_field :reps, placeholder: "# of reps" %>
+        <%= i.label :weight %>
+        <%= i.text_field :weight, placeholder: "weight in lbs" %>
+        <%= i.label :duration %>
+        <%= i.text_field :duration, placeholder: "time in mins" %>
+      <% elsif category == "cardio" %>
+        <%= i.label :distance %>
+        <%= i.text_field :distance, placeholder: "distance in km" %>
+        <%= i.label :duration %>
+        <%= i.text_field :duration, placeholder: "time in mins" %>
+      <% end %>
+    <% end %>
+    <br>
+  <% end %>
+  <%= f.submit %>
+
+
+<% end %>

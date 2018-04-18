@@ -52,19 +52,24 @@ class User < ApplicationRecord
 
   def cardio_by_percentage
     x = ((self.cardiocount.to_f) / (self.totalexercises.to_f))*100
-    x.to_i
+    x.nan? ? 0 : x.to_i
+
   end
 
   def strength_by_percentage
     y = ((self.strengthcount.to_f) / (self.totalexercises.to_f))*100
-    y.to_i
+    y.nan? ? 0 : y.to_i
   end
 
   def favouritexercise
-    m = self.allexercises.group_by do |e|
-      e
+    if self.allexercises.count > 0
+      m = self.allexercises.group_by do |e|
+        e
+      end
+      m.values.max_by(&:size).first
+    else
+      nil
     end
-    m.values.max_by(&:size).first
   end
 
   def friend_workouts

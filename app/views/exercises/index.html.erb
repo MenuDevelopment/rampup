@@ -1,0 +1,18 @@
+<h2> Exercises </h2>
+
+<br>
+
+
+<div class=.four-ul>
+  <ul>
+<% @exercises.each do |exercise| %>
+
+<b><%= "#{exercise.name}" %></b>
+<br>
+Description: <%= "#{exercise.description} " %>
+<br>
+Exercises Category:  <%= exercise.category.capitalize %>
+<hr>
+<% end %>
+</ul>
+</div>

@@ -25,6 +25,7 @@ class WorkoutsController < ApplicationController
   end
 
   def edit
+    return head(:forbidden) unless @workout.user == current_user
     @exercises = Exercise.all
     @e_ws = @workout.exercise_workouts
   end

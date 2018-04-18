@@ -21,12 +21,6 @@
   <%= f.label :email %>
   <%= f.text_field :email %><br>
 
-  <%= f.label :password %>
-  <%= f.password_field :password %><br>
-
-  <%= f.label :password_confirmation %>
-  <%= f.password_field :password_confirmation %><br>
-
   <%= f.label :height %>
   <%= f.collection_select :height, @heights, :to_s, :to_s %><br>
   <%= f.label :weight %>

@@ -41,9 +41,15 @@ class UsersController < ApplicationController
   end
 
   def update
-    byebug
-    @user.update(user_params)
-    redirect_to @user
+    @user.first_name = user_params[:first_name]
+
+    if @user.valid?
+      @user.save
+      redirect_to root_path
+    else
+      flash[:errors] = @user.errors.full_messages
+      redirect_to edit_user_path
+    end
   end
 
   def show

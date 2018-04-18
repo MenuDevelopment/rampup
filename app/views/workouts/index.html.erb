@@ -1,0 +1,29 @@
+<h2><%= current_user.first_name %>, here are all of your workouts!</h2>
+<a role="button" href="<%=new_workout_path %>" class="btn btn-light">New Workout</a>
+
+<hr>
+
+Insights:
+<br>
+Total # workouts: <b> <%= current_user.workouts.count %> </b>|
+Cardio %: <b><%= current_user.cardio_by_percentage %> </b>|
+Strength %: <b><%= current_user.strength_by_percentage %> </b>|
+
+Your Favourite Exercise: <b> <%= current_user.favouritexercise.name %> </b>|
+Average Time Spent Per Workout: <b><%= current_user.avg_duration %> </b> mins
+
+<hr>
+
+<ul>
+ <% current_user.workouts.each do |workout| %>
+ <% day = workout.day.strftime("%m/%d/%Y") if workout.day %>
+<b><%= link_to "#{workout.name.capitalize}", workout_path(workout) %></b>
+<br>
+Date Completed: <%= "#{day} " %>
+<br>
+Exercises Completed:  <% workout.exercises.each do |exercise| %>
+<%= link_to exercise.name, exercise %>
+<% end %>
+<hr>
+<% end %>
+</ul>

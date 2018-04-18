@@ -1,14 +1,35 @@
-<h1>Login or Create New User</h1>
+<div class="col-md-8 order-md-1">
+  <div class="mb-3">
+    <h1>Login or Create New User</h1>
+  </div>
 
-<% if flash[:errors] %>
-  <h4><%= flash[:errors] %></h4>
-<% end %>
+  <%= form_tag sessions_path, class: "needs-validation" do %>
+  <div class="row">
+    <div class="col-md-6 mb-3">
+      <%= label_tag :username %>
+      <%= text_field_tag :username, nil, class: "form-control" %>
+        <% if flash[:errors] %>
+          <div class="class="invalid-feedback"">
+            <%= flash[:errors] %>
+          </div>
+        <% end %>
+    </div>
+  </div>
 
-<%= form_tag sessions_path do %>
-  <%= label_tag :username %>
-  <%= text_field_tag :username %><br>
-  <%= label_tag :password %>
-  <%= password_field_tag :password %><br>
+  <div class="row">
+    <div class="col-md-6 mb-3">
+      <%= label_tag :password %>
+      <%= password_field_tag :password, nil, class: "form-control" %>
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="col-md-6 mb-3">
+      <%= submit_tag "log in", class: "btn btn-primary" %> or <%= link_to(controller: 'users', action: 'new') { 'sign up' } %>
+    </div>
+  </div>
 
-  <%= submit_tag "log in", class: "btn btn-primary" %> or <%= link_to(controller: 'users', action: 'new') { 'sign up' } %>
-<% end %>
+
+  <% end %>
+
+</div>

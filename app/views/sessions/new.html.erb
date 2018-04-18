@@ -8,6 +8,9 @@
     <div class="col-md-6 mb-3">
       <%= label_tag :username %>
       <%= text_field_tag :username, nil, class: "form-control" %>
+      <div class="invalid-feedback">
+        <%= flash[:errors] %>
+      </div>
         <% if flash[:errors] %>
           <p><%= flash[:errors] %></p>
         <% end %>

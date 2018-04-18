@@ -1,12 +1,12 @@
 <h1><%= @user.full_name %></h1>
-
-<% if current_user.friends.include?(@user) %>
-  <a role="button" href="<%= friendship_path %>" data-method="delete" class="btn btn-light">Unfollow</a>
-<% end %>
-
-<% if session[:user_id] == @user.id %>
+<% if @user == current_user %>
   <a role="button" href="<%= edit_user_path %>" class="btn btn-primary btn-sm">Edit Account</a>
-
+  <% else %>
+    <% if current_user.friends.include?(@user) %>
+      <a role="button" href="<%= friendship_path %>" data-method="delete" class="btn btn-light">Unfollow</a>
+    <% else %>
+      <a role="button" href="<%= friendships_path(friend_id: @user) %>" data-method="post" class="btn btn-light">Follow</a>
+    <% end %>
 <% end %>
 
 <% if @user.friendships != [] %>

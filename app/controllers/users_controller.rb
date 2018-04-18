@@ -41,7 +41,7 @@ class UsersController < ApplicationController
   end
 
   def update
-    @user.first_name = user_params[:first_name]
+    @user.update(user_params)
 
     if @user.valid?
       @user.save

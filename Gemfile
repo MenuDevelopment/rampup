@@ -5,6 +5,9 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
+gem 'simple_form'
+#to upload photos
+gem "paperclip", "~> 6.0.0"
 #bcrypt for additional password protections
 gem 'bcrypt'
 #faker

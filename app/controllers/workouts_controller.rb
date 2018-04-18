@@ -7,15 +7,15 @@ class WorkoutsController < ApplicationController
   def new
     @workout = Workout.new
     @exercises = Exercise.all
-    @users = User.all
   end
 
   def create
-    params[:workout][:user] = User.find(params[:workout][:user])
 
-    @workout = Workout.create(workout_params)
+    @workout = Workout.new(workout_params)
+    @workout.user = current_user
     if @workout.valid?
-      redirect_to edit_workout_path(@workout)
+      @workout.save
+      redirect_to workout_path(@workout)
     else
       flash[:errors] = @workout.errors.full_messages
       redirect_to new_workout_path
@@ -25,6 +25,7 @@ class WorkoutsController < ApplicationController
   def edit
     @workout = Workout.find(params[:id])
     @exercises = Exercise.all
+    @e_ws = @workout.exercise_workouts
   end
 
   def update
@@ -47,8 +48,9 @@ class WorkoutsController < ApplicationController
   private
 
   def workout_params
-    params.require(:workout).permit(:id, :name, :day, :user,
-       exercise_ids: [:id],
+    params.require(:workout).permit(:name, :day,
+      user: [],
+      exercise_ids: [],
        exercise_workouts_attributes: [
          :duration,
          :reps,

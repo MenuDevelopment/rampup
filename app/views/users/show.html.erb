@@ -2,16 +2,34 @@
 <%= image_tag @user.avatar.url(:medium) %><br><br>
 <% if @user == current_user %>
   <a role="button" href="<%= edit_user_path %>" class="btn btn-primary btn-sm">Edit Account</a>
-  <% else %>
-    <% if current_user.friends.include?(@user) %>
-      <a role="button" href="<%= friendship_path %>" data-method="delete" class="btn btn-light">Unfollow</a>
-    <% else %>
-      <a role="button" href="<%= friendships_path(friend_id: @user) %>" data-method="post" class="btn btn-light">Follow</a>
-    <% end %>
-<% end %>
+
+<hr>
+
+<h3> Ramp Up Stats </h3>
+Total Workouts: <b><%= User.total_workouts_all_users %></b>
+Total Time Spent(mins): <b><%= User.total_time_spent_at_gym_array %></b>
+Total Users: <b><%= User.all.count %> </b>
+Trending Exercises:
+
+<hr>
+<h3> Friend's Workouts </h3>
+<ul>
+<% @user.friends.collect do |friend| %>
+    <b><%= link_to friend.username.capitalize, user_path(friend) %></b>
+    <br>
+     <% friend.workouts.each do |workout| %>
+     <% day = workout.day.strftime("%m/%d/%Y") if workout.day %>
+     Date Completed: <%= "#{day} " %> <br>
+     Exercises Completed:  <% workout.exercises.each do |exercise| %>
+     <%= link_to exercise.name, exercise %>
+     <% end %>
+ <% end %>
+ <br>
+ <% end %>
+</ul>
 
 <% if @user.friendships != [] %>
-  <h3>Following:</h3>
+  Following:
     <% if flash[:notice] %>
       <p><%= flash[:notice] %></p>
     <% end %>
@@ -22,7 +40,7 @@
     </ul>
   <% end %>
 
-<% if @user.friends != [] %>
+<% if @user.inverse_friends != [] %>
   <h3>Followers:</h3>
     <ul>
       <% @user.inverse_friends.each do |f| %>
@@ -30,3 +48,45 @@
       <% end %>
     </ul>
 <% end %>
+<hr>
+<h3>Your Latest Workouts</h3>
+<ul>
+ <% current_user.workouts.each do |workout| %>
+ <% day = workout.day.strftime("%m/%d/%Y") if workout.day %>
+<b> <%= link_to "#{workout.name.capitalize}", workout_path(workout) %></b>
+<br>
+Date Completed: <%= "#{day} " %>
+<br>
+Exercises Completed:  <% workout.exercises.each do |exercise| %>
+<%= link_to exercise.name, exercise %>
+<% end %>
+<br>
+<% end %>
+</ul>
+
+
+<% else %>
+  <% if current_user.friends.include?(@user) %>
+    <a role="button" href="<%= friendship_path %>" data-method="delete" class="btn btn-light">Unfollow</a>
+  <% else %>
+    <a role="button" href="<%= friendships_path(friend_id: @user) %>" data-method="post" class="btn btn-light">Follow</a>
+  <% end %>
+
+<h3> Latest Workouts</h3>
+<hr>
+<ul>
+ <% @user.workouts.each do |workout| %>
+ <% day = workout.day.strftime("%m/%d/%Y") if workout.day %>
+<b> <%= link_to "#{workout.name.capitalize}", workout_path(workout) %></b>
+<br>
+Date Completed: <%= "#{day} " %>
+<br>
+Exercises Completed:  <% workout.exercises.each do |exercise| %>
+<%= link_to exercise.name, exercise %>
+<% end %>
+<br>
+<% end %>
+</ul>
+
+
+  <% end %>

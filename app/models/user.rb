@@ -74,11 +74,6 @@ class User < ApplicationRecord
     end
   end
 
-  def friend_workouts
-    @user.friends.collect do |friend|
-       friend.workouts
-     end
-   end
 
 ## array of all ex workouts with duration
    def total_time_exercise_workouts
@@ -105,9 +100,39 @@ class User < ApplicationRecord
      self.total / self.total_workouts
    end
 
+   def friend_workouts
+     @user.friends.each do |friend|
+        friend.workouts
+      end
+    end
 
+def self.total_workouts_all_users
+  count = 0
+  User.all.each do |user|
+  count += user.workouts.count
+   end
+   count
+end
 
+def self.total_time_spent_at_gym_array
+  duration = 0
+  User.all.each do |user|
+    duration += user.total
+  end
+  duration
+end
 
+def self.favourite_exercise
+  User.all.collect do |user|
+    user.favouritexercise
+  end
+end
 
+def self.favouritexercise_actual
+  User.all.favourite_exercise.group_by  do |e|
+    e
+  end
+  m.values.max_by(&:size).first
+end
 
 end

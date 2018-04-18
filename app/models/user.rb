@@ -27,4 +27,82 @@ class User < ApplicationRecord
     "#{self.first_name} #{self.last_name}"
   end
 
+
+  def allexercises
+    self.workouts.map do |workout|
+      workout.exercises
+    end.flatten
+  end
+
+  def totalexercises
+    allexercises.count
+  end
+
+  def cardiocount
+    x =  self.allexercises.select do |exercise|
+      exercise.category == "cardio"
+    end
+    x.count
+  end
+
+  def strengthcount
+    y = self.allexercises.select do |exercise|
+      exercise.category == "strength"
+    end
+    y.count
+  end
+
+  def cardio_by_percentage
+    x = ((self.cardiocount.to_f) / (self.totalexercises.to_f))*100
+    x.to_i
+  end
+
+  def strength_by_percentage
+    y = ((self.strengthcount.to_f) / (self.totalexercises.to_f))*100
+    y.to_i
+  end
+
+  def favouritexercise
+    m = self.allexercises.group_by do |e|
+      e
+    end
+    m.values.max_by(&:size).first
+  end
+
+  def friend_workouts
+    @user.friends.collect do |friend|
+       friend.workouts
+     end
+   end
+
+## array of all ex workouts with duration
+   def total_time_exercise_workouts
+     self.exercise_workouts.select do |ex|
+       ex.duration
+     end
+   end
+
+## total duration from all exercise workouts
+   def total
+     count = 0
+     self.total_time_exercise_workouts.each do |ex|
+       count += ex.duration
+     end
+     count
+   end
+
+##total workouts
+   def total_workouts
+     self.workouts.count
+   end
+
+   def avg_duration
+     self.total / self.total_workouts
+   end
+
+
+
+
+
+
 end

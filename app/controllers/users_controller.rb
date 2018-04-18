@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :user_params, only: [:create, :edit, :update]
+  before_action :user_params, only: [:create, :update]
   before_action :require_logged_in, except: [:new, :create]
 
   def index
@@ -29,9 +29,20 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
+  def edit
+    @user = User.find(params[:id])
+  end
+
+  def update
+    @user = User.find(params[:id])
+    @user.update(user_params)
+    byebug
+    redirect_to user_path(@user)
+  end
+
   private
 
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :email, :username, :password_digest, :password, :password_confirmation, :height, :weight, :age)
+    params.require(:user).permit(:first_name, :last_name, :email, :username, :password_digest, :password, :password_confirmation, :height, :weight, :age, :avatar)
   end
 end

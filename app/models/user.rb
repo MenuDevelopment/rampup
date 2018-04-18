@@ -5,7 +5,7 @@ class User < ApplicationRecord
   validates :email, uniqueness: { case_sensitive: false }
   validates_format_of :username, with: /\A[a-zA-Z0-9]+\Z/
   validates_format_of :email, with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i, on: :create
-  validates :password, length: { in: 8..12 }
+  validates :password, length: { in: 8..12 }, on: :create
   validates :height, presence: true
   validates :weight, numericality: {only_integer: true, greater_than_or_equal_to: 1, less_than_or_equal_to: 1000}
   validates :age, numericality: {only_integer: true, greater_than_or_equal_to: 13, less_than_or_equal_to: 120}
@@ -18,6 +18,8 @@ class User < ApplicationRecord
   has_many :exercise_workouts, through: :workouts
   has_many :memberships
   has_many :gyms, through: :memberships
+  has_attached_file :avatar, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "/images/:style/missing.png"
+  validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\z/
 
   has_secure_password
 

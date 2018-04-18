@@ -4,7 +4,7 @@
   <p>HI this is you!</p>
   <p>user profile editing functionality goes here</p>
 
-  <h3>Friends</h3>
+  <h3>Following:</h3>
 
   <% if flash[:notice] %>
     <p><%= flash[:notice] %></p>
@@ -18,14 +18,25 @@
     <% else %>
       <p>You currently don't have any friends. Add some <%= link_to "here!", users_path %></p>
     <% end %>
-
   </ul>
 
-  <% else %>
-    <% if @user.friendships != [] %>
-      <% @user.friendships.each do |f| %>
-        <li><%= link_to f.friend.username, f.friend %></li>
+  <h3>Followers:</h3>
+    <ul>
+      <% @user.inverse_friends.each do |f| %>
+        <li><%= link_to f.username, f %></li>
       <% end %>
+    </ul>
+
+    <%= link_to "All Users", users_path %>
+
+<% else %>
+  <% if @user.friendships != [] %>
+    <p>Following:</p>
+    <% @user.friendships.each do |f| %>
+      <li><%= link_to f.friend.username, f.friend %></li>
     <% end %>
+  <% end %>
+
+  <%= link_to "All Users", users_path %>
 
 <% end %>

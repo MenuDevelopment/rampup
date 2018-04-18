@@ -41,6 +41,9 @@ class UsersController < ApplicationController
   end
 
   def update
+    byebug
+    @user.update(user_params)
+    redirect_to @user
   end
 
   def show

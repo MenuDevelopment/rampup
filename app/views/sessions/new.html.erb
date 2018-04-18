@@ -3,15 +3,13 @@
     <h1>Login or Create New User</h1>
   </div>
 
-  <%= form_tag sessions_path, class: "needs-validation" do %>
+  <%= form_tag sessions_path, class: "form-signin" do %>
   <div class="row">
     <div class="col-md-6 mb-3">
       <%= label_tag :username %>
       <%= text_field_tag :username, nil, class: "form-control" %>
         <% if flash[:errors] %>
-          <div class="class="invalid-feedback"">
-            <%= flash[:errors] %>
-          </div>
+          <p><%= flash[:errors] %></p>
         <% end %>
     </div>
   </div>
@@ -22,7 +20,7 @@
       <%= password_field_tag :password, nil, class: "form-control" %>
     </div>
   </div>
-  
+
   <div class="row">
     <div class="col-md-6 mb-3">
       <%= submit_tag "log in", class: "btn btn-primary" %> or <%= link_to(controller: 'users', action: 'new') { 'sign up' } %>

@@ -1,45 +1,31 @@
 <h1><%= @user.full_name %></h1>
+<% if @user == current_user %>
+  <a role="button" href="<%= edit_user_path %>" class="btn btn-primary btn-sm">Edit Account</a>
+  <% else %>
+    <% if current_user.friends.include?(@user) %>
+      <a role="button" href="<%= friendship_path %>" data-method="delete" class="btn btn-light">Unfollow</a>
+    <% else %>
+      <a role="button" href="<%= friendships_path(friend_id: @user) %>" data-method="post" class="btn btn-light">Follow</a>
+    <% end %>
+<% end %>
 
-<% if session[:user_id] == @user.id %>
-  <p>HI this is you!</p>
-  <p>user profile editing functionality goes here</p>
-
+<% if @user.friendships != [] %>
   <h3>Following:</h3>
-
-  <% if flash[:notice] %>
-    <p><%= flash[:notice] %></p>
+    <% if flash[:notice] %>
+      <p><%= flash[:notice] %></p>
+    <% end %>
+    <ul>
+      <% @user.friendships.each do |f| %>
+        <li><%= link_to f.friend.username, f.friend %></li>
+      <% end %>
+    </ul>
   <% end %>
 
-  <ul>
-    <% if @user.friendships != [] %>
-      <% @user.friendships.each do |f| %>
-        <li><%= link_to f.friend.username, f.friend %> - <%= link_to "Remove Friend", friendship_path(:friend_id => f), :method => :delete %></li>
-      <% end %>
-    <% else %>
-      <p>You currently don't have any friends. Add some <%= link_to "here!", users_path %></p>
-    <% end %>
-  </ul>
-
+<% if @user.friends != [] %>
   <h3>Followers:</h3>
     <ul>
       <% @user.inverse_friends.each do |f| %>
         <li><%= link_to f.username, f %></li>
       <% end %>
     </ul>
-
-    <%= link_to "All Users", users_path %>
-
-<% else %>
-  <% if @user.friendships != [] %>
-    <p>Following:</p>
-    <% @user.friendships.each do |f| %>
-      <li><%= link_to f.friend.username, f.friend %></li>
-    <% end %>
-  <% end %>
-  
-  <%= link_to "Create a new Workout", new_workout_path %>
-
-  <%= link_to "All Users", users_path %>
-
-
 <% end %>

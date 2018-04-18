@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
-  before_action :user_params, only: [:create, :edit, :update]
+  before_action :get_user, only: [:edit, :show, :update, :delete]
+  before_action :user_params, only: [:create, :update]
   before_action :require_logged_in, except: [:new, :create]
 
   def index
@@ -26,15 +27,39 @@ class UsersController < ApplicationController
       redirect_to root_path
     else
       flash[:errors] = @user.errors.full_messages
-      redirect_to new_user_path
+      redirect_to signup_path
+    end
+  end
+
+  def edit
+    @user = User.find(params[:id])
+    @heights = (48..100).to_a.map { |inch| (inch/12).floor.to_s+'\''+(inch%12).to_s }
+
+    if @user != current_user
+      redirect_to root_path
+    end
+  end
+
+  def update
+    @user.update(user_params)
+
+    if @user.valid?
+      @user.save
+      redirect_to root_path
+    else
+      flash[:errors] = @user.errors.full_messages
+      redirect_to edit_user_path
     end
   end
 
   def show
-    @user = User.find(params[:id])
   end
 
   private
+
+  def get_user
+    @user = User.find(params[:id])
+  end
 
   def user_params
     params.require(:user).permit(:first_name, :last_name, :email, :username, :password_digest, :password, :password_confirmation, :height, :weight, :age)

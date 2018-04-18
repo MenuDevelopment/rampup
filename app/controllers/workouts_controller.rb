@@ -1,4 +1,7 @@
 class WorkoutsController < ApplicationController
+  before_action :require_logged_in
+  before_action :set_workout, only: [:show, :edit, :update]
+  before_action :require_self_or_friendship, only: :show
 
   def index
     @workouts = Workout.all
@@ -10,7 +13,6 @@ class WorkoutsController < ApplicationController
   end
 
   def create
-
     @workout = Workout.new(workout_params)
     @workout.user = current_user
     if @workout.valid?
@@ -23,13 +25,12 @@ class WorkoutsController < ApplicationController
   end
 
   def edit
-    @workout = Workout.find(params[:id])
+    return head(:forbidden) unless @workout.user == current_user
     @exercises = Exercise.all
     @e_ws = @workout.exercise_workouts
   end
 
   def update
-    @workout = Workout.find(params[:id])
     @workout.update(workout_params)
     if @workout.valid?
       redirect_to @workout
@@ -42,10 +43,18 @@ class WorkoutsController < ApplicationController
 
 
   def show
-    @workout = Workout.find(params[:id])
   end
 
   private
+
+  def set_workout
+    @workout = Workout.find(params[:id])
+  end
+
+  def require_self_or_friendship
+    user = @workout.user
+    return head(:forbidden) unless user == current_user || current_user.friends.include?(user)
+  end
 
   def workout_params
     params.require(:workout).permit(:name, :day,

@@ -18,11 +18,121 @@ class User < ApplicationRecord
   has_many :exercise_workouts, through: :workouts
   has_many :memberships
   has_many :gyms, through: :memberships
+  has_attached_file :avatar, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "/images/:style/missing.png"
+  validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\z/
 
   has_secure_password
 
   def full_name
     "#{self.first_name} #{self.last_name}"
   end
+
+
+  def allexercises
+    self.workouts.map do |workout|
+      workout.exercises
+    end.flatten
+  end
+
+  def totalexercises
+    allexercises.count
+  end
+
+  def cardiocount
+    x =  self.allexercises.select do |exercise|
+      exercise.category == "cardio"
+    end
+    x.count
+  end
+
+  def strengthcount
+    y = self.allexercises.select do |exercise|
+      exercise.category == "strength"
+    end
+    y.count
+  end
+
+  def cardio_by_percentage
+    x = ((self.cardiocount.to_f) / (self.totalexercises.to_f))*100
+    x.nan? ? 0 : x.to_i
+
+  end
+
+  def strength_by_percentage
+    y = ((self.strengthcount.to_f) / (self.totalexercises.to_f))*100
+    y.nan? ? 0 : y.to_i
+  end
+
+  def favouritexercise
+    if self.allexercises.count > 0
+      m = self.allexercises.group_by do |e|
+        e
+      end
+      m.values.max_by(&:size).first
+    else
+      nil
+    end
+  end
+
+
+## array of all ex workouts with duration
+   def total_time_exercise_workouts
+     self.exercise_workouts.select do |ex|
+       ex.duration
+     end
+   end
+
+## total duration from all exercise workouts
+   def total
+     count = 0
+     self.total_time_exercise_workouts.each do |ex|
+       count += ex.duration
+     end
+     count
+   end
+
+##total workouts
+   def total_workouts
+     self.workouts.count
+   end
+
+   def avg_duration
+     self.total / self.total_workouts
+   end
+
+   def friend_workouts
+     @user.friends.each do |friend|
+        friend.workouts
+      end
+    end
+
+def self.total_workouts_all_users
+  count = 0
+  User.all.each do |user|
+  count += user.workouts.count
+   end
+   count
+end
+
+def self.total_time_spent_at_gym_array
+  duration = 0
+  User.all.each do |user|
+    duration += user.total
+  end
+  duration
+end
+
+def self.favourite_exercise
+  User.all.collect do |user|
+    user.favouritexercise
+  end
+end
+
+def self.favouritexercise_actual
+  User.all.favourite_exercise.group_by  do |e|
+    e
+  end
+  m.values.max_by(&:size).first
+end
 
 end

@@ -1,0 +1,36 @@
+<% if flash[:errors] %>
+  <h3>Errors</h3>
+  <ul>
+    <% flash[:errors].each do |error| %>
+      <li><%= error %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<%= form_for @user do |f| %>
+  <%= f.label :first_name %>
+  <%= f.text_field :first_name %><br>
+  <%= f.label :last_name %>
+  <%= f.text_field :last_name %><br>
+
+  <%= f.label :username %>
+  <%= f.text_field :username %><br>
+
+  <%= f.label :email %>
+  <%= f.text_field :email %><br>
+
+  <%= f.label :password %>
+  <%= f.password_field :password %><br>
+
+  <%= f.label :password_confirmation %>
+  <%= f.password_field :password_confirmation %><br>
+
+  <%= f.label :height %>
+  <%= f.collection_select :height, @heights, :to_s, :to_s %><br>
+  <%= f.label :weight %>
+  <%= f.number_field :weight %><br>
+  <%= f.label :age %>
+  <%= f.number_field :age %><br>
+
+  <%= f.submit class:"btn btn-primary" %>
+<% end %>

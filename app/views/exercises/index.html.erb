@@ -7,7 +7,7 @@
   <ul>
 <% @exercises.each do |exercise| %>
 
-<b><%= "#{exercise.name}" %></b>
+<b><%= link_to "#{exercise.name}", exercise_path(exercise) %></b>
 <br>
 Description: <%= "#{exercise.description} " %>
 <br>

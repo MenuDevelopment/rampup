@@ -1,12 +1,12 @@
 <h1><%= @user.full_name %></h1>
 <% if @user == current_user %>
   <a role="button" href="<%= edit_user_path %>" class="btn btn-primary btn-sm">Edit Account</a>
+<% else %>
+  <% if current_user.friends.include?(@user) %>
+    <a role="button" href="<%= friendship_path %>" data-method="delete" class="btn btn-light">Unfollow</a>
   <% else %>
-    <% if current_user.friends.include?(@user) %>
-      <a role="button" href="<%= friendship_path %>" data-method="delete" class="btn btn-light">Unfollow</a>
-    <% else %>
-      <a role="button" href="<%= friendships_path(friend_id: @user) %>" data-method="post" class="btn btn-light">Follow</a>
-    <% end %>
+    <a role="button" href="<%= friendships_path(friend_id: @user) %>" data-method="post" class="btn btn-light">Follow</a>
+  <% end %>
 <% end %>
 
 <% if @user.friendships != [] %>
@@ -21,7 +21,7 @@
     </ul>
   <% end %>
 
-<% if @user.friends != [] %>
+<% if @user.inverse_friends != [] %>
   <h3>Followers:</h3>
     <ul>
       <% @user.inverse_friends.each do |f| %>

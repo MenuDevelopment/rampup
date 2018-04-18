@@ -18,4 +18,5 @@ class User < ApplicationRecord
   has_many :gyms, through: :memberships
 
   has_secure_password
+
 end

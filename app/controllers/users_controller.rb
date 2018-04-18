@@ -6,6 +6,11 @@ class UsersController < ApplicationController
     @users = User.all
   end
 
+  def home
+    @user = current_user
+    redirect_to @user
+  end
+
   def new
     @user = User.new
     # @heights = (56..112).to_a.map { |inch| { id: inch.to_s, name: (inch/12).floor.to_s+'\''+(inch%12).to_s } }

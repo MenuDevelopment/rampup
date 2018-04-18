@@ -12,7 +12,7 @@ Total Users: <b><%= User.all.count %> </b>
 Trending Exercises:
 
 <hr>
-<h3> Friend's Workouts </h3>
+<h3> Followee's Workouts </h3>
 <ul>
 <% @user.friends.collect do |friend| %>
     <b><%= link_to friend.username.capitalize, user_path(friend) %></b>
@@ -29,7 +29,7 @@ Trending Exercises:
 </ul>
 
 <% if @user.friendships != [] %>
-  Following:
+  <h3>Following:</h3>
     <% if flash[:notice] %>
       <p><%= flash[:notice] %></p>
     <% end %>

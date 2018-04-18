@@ -18,6 +18,8 @@ class User < ApplicationRecord
   has_many :exercise_workouts, through: :workouts
   has_many :memberships
   has_many :gyms, through: :memberships
+  has_attached_file :avatar, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "/images/:style/missing.png"
+  validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\z/
 
   has_secure_password
 
@@ -52,19 +54,24 @@ class User < ApplicationRecord
 
   def cardio_by_percentage
     x = ((self.cardiocount.to_f) / (self.totalexercises.to_f))*100
-    x.to_i
+    x.nan? ? 0 : x.to_i
+
   end
 
   def strength_by_percentage
     y = ((self.strengthcount.to_f) / (self.totalexercises.to_f))*100
-    y.to_i
+    y.nan? ? 0 : y.to_i
   end
 
   def favouritexercise
-    m = self.allexercises.group_by do |e|
-      e
+    if self.allexercises.count > 0
+      m = self.allexercises.group_by do |e|
+        e
+      end
+      m.values.max_by(&:size).first
+    else
+      nil
     end
-    m.values.max_by(&:size).first
   end
 
   def friend_workouts

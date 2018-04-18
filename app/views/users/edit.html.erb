@@ -9,7 +9,9 @@
   </ul>
 <% end %>
 
-<%= form_for @user do |f| %>
+<%= form_for @user, url: user_path, html: { multipart: true } do |f| %>
+  <%= f.file_field :avatar %><br>
+
   <%= f.label :first_name %>
   <%= f.text_field :first_name %><br>
   <%= f.label :last_name %>

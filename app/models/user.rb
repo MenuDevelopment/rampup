@@ -136,4 +136,9 @@ def self.favouritexercise_actual
   m.values.max_by(&:size).first
 end
 
+
+
+
+
+
 end

@@ -1,6 +1,6 @@
 <h1><%= @workout.name %></h1>
 
-<h4><%= "#{@workout.user.username} worked out " %><%= @workout.day.strftime("on %m/%d/%Y") if @workout.day %></h4><br>
+<h4>@<%= link_to @workout.user.username, @workout.user %> worked out <%= @workout.day.strftime("on %m/%d/%Y") if @workout.day %></h4><br>
 
 <% @workout.exercise_workouts.each do |e_w| %>
   <% exercise = e_w.exercise %>

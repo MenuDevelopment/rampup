@@ -10,6 +10,8 @@
           <h1 class="lead font-weight-normal"><%= @user.full_name %></h1>
           <% if @user == current_user %>
           <a class="btn btn-primary btn-sm" href="<%= edit_user_path %>"> Edit Acount</a>
+          <a class="btn btn-primary btn-sm" href="<%= new_workout_path %>"> Create Workout</a>
+
       </div>
 </div>
 
@@ -168,7 +170,7 @@
 
   </div>
 </div>
-   
+
 
   <div class="container" >
     <div class="col-md-12 col-xs-12" align="center">

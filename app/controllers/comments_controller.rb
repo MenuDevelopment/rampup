@@ -1,7 +1,8 @@
 class CommentsController < ApplicationController
-  before_action :require_logged_in, except: [:index]
+  before_action :require_logged_in, except: :index
   before_action :find_workout
-  before_action :require_self_or_friendship, except: [:index]
+  before_action :set_comment, only: :destroy
+  before_action :require_self_or_friendship, except: [:index, :destroy]
 
 
   def index
@@ -23,6 +24,14 @@ class CommentsController < ApplicationController
     end
   end
 
+  def destroy
+    if @comment
+      return head(:forbidden) unless @comment.user == current_user || @workout.user == current_user
+      @comment.destroy
+      redirect_to @workout
+    end
+  end
+
   private
 
   def require_self_or_friendship
@@ -35,7 +44,7 @@ class CommentsController < ApplicationController
   end
 
   def set_comment
-    @comment = Comment.find(params[:id])
+    @comment = Comment.find(params[:id]) if params[:id]
   end
 
   def comment_params

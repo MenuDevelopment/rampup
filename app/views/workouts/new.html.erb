@@ -18,12 +18,22 @@
   </div>
 </div>
 
-<div class="input-group mb-3">
+<div class="mb-3">
   <%= f.collection_check_boxes :exercise_ids, @exercises, :id, :name do |b| %>
-      <%= b.label class:"label-checkbox" do%>
-        <%=b.check_box + b.text %>
-      <%end%>
-    <% end %>
+    <%= b.label class:"label-checkbox" do %>
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <div class="input-group-text">
+            <%= b.check_box type: "checkbox" %>
+          </div>
+        </div>
+        <div class="form-control">
+          <%= b.text%>
+        </div>
+      </div>
+    <%end%>
+  <% end %>
 </div>
+
   <%= f.submit class: "btn btn-primary" %>
 <% end %>

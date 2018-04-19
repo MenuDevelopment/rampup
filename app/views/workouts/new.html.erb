@@ -7,15 +7,23 @@
 <% end %>
 
 <%= form_for @workout do |f| %>
-  <%= f.label :name %> of workout:
-  <%= f.text_field :name, value: "Workout on #{Date.today.strftime("%m/%d/%Y")}" %> <br><br>
-  <%=f.label :day %>
-  <%= f.date_field :day, value: "#{Date.today}" %><br><br>
+<div class="row">
+  <div class="col-md-6 mb-3">
+    <%= f.label :name, value: "Name of workout" %>
+    <%= f.text_field :name, value: "Workout on #{Date.today.strftime("%m/%d/%Y")}", class: "form-control" %>
+  </div>
+  <div class="col-md-6 mb-3">
+    <%=f.label :day %>
+    <%= f.date_field :day, value: "#{Date.today}", class: "form-control" %>
+  </div>
+</div>
+
+<div class="input-group mb-3">
   <%= f.collection_check_boxes :exercise_ids, @exercises, :id, :name do |b| %>
       <%= b.label class:"label-checkbox" do%>
-        <%=b.check_box + b.text%>
+        <%=b.check_box + b.text %>
       <%end%>
     <% end %>
-  <br><br>
-  <%= f.submit %>
+</div>
+  <%= f.submit class: "btn btn-primary" %>
 <% end %>

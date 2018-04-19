@@ -98,8 +98,6 @@
 <% end %>
 </div>
 
-</div>
-
 <hr>
 
 
@@ -164,9 +162,13 @@
     <a role="button" href="<%= friendships_path(friend_id: @user) %>" data-method="post" class="btn btn-light">Follow</a>
   <% end %>
 
+  <br>
+  <br>
+  <div class="container">
 
-  <br>
-  <br>
+  </div>
+</div>
+   
 
   <div class="container" >
     <div class="col-md-12 col-xs-12" align="center">
@@ -199,10 +201,10 @@
                       <p> % strength </p>
                   </button>
               </div>
-              <div class="btn-group" onclick="#">
+              <div class="btn-group" onclick=" exercise_path(@user.favouritexercise) ">
                   <button type="button" class="btn btn-nav">
                       <span class="glyphicon glyphicon-question-sign"></span>
-                 <h4><%= @user.favouritexercise.name %></h4>
+                 <h4><%= @user.favouritexercise.name  %></h4>
                  <p> Fav Ex </p>
                   </button>
               </div>
@@ -224,6 +226,10 @@
   	</div>
   </div>
   </div>
+<div class="container">
+
+ </div>
+</div>
 
 <div class="col-md-12 col-xs-12" align="left">
 <div class="container">
@@ -248,6 +254,8 @@
    <% end %>
  </div>
 </div>
+
+
 
 
   <% end %>

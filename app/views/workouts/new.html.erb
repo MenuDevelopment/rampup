@@ -19,9 +19,10 @@
 </div>
 
 <div class="mb-3">
+  <p>Exercises</p>
   <%= f.collection_check_boxes :exercise_ids, @exercises, :id, :name do |b| %>
     <%= b.label class:"label-checkbox" do %>
-      <div class="input-group mb-3">
+        <div class="input-group mb-3">
         <div class="input-group-prepend">
           <div class="input-group-text">
             <%= b.check_box type: "checkbox" %>

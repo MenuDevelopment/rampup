@@ -135,6 +135,7 @@
 <div class="container">
 <div class='row'>
 <% if @user.friendships != [] %>
+<div class="col-md-3 mb-3">
   <h3>Following:</h3>
     <% end %>
     <ul>
@@ -142,14 +143,18 @@
         <li><%= link_to f.friend.username, f.friend %></li>
       <% end %>
     </ul>
+</div>
+
 
 <% if @user.inverse_friends != [] %>
+<div class="col-md-3 mb-3">
   <h3>Followers:</h3>
     <ul>
       <% @user.inverse_friends.each do |f| %>
         <li><%= link_to f.username, f %></li>
       <% end %>
     </ul>
+  </div>
 <% end %>
 </div>
 </div>

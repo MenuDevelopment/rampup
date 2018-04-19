@@ -1,36 +1,8 @@
 <h1><%= @workout.name %></h1>
 
-<h4>@<%= link_to @workout.user.username, @workout.user %> worked out <%= @workout.day.strftime("on %m/%d/%Y") if @workout.day %></h4><br>
+<h4>@<%= link_to @workout.user.username, @workout.user %> worked out <%= @workout.day.strftime("on %m/%d/%Y") if @workout.day %></h4>
 
-<% @workout.exercise_workouts.each do |e_w| %>
-  <% exercise = e_w.exercise %>
-  <%= link_to exercise.name, exercise %>
-  <%= "Reps: #{e_w.reps} |" if e_w.reps %>
-  <%= "Weight: #{e_w.weight} |" if e_w.weight %>
-  <%= "Duration: #{e_w.duration} mins |" if e_w.duration %>
-  <%= "Distance: #{e_w.distance} |" if e_w.distance %>
-  <br>
-<% end %>
-<br>
-
-<!-- comments stuff here  -->
-<% if @workout.comments.length > 0 %>
-  <% @workout.comments.each do |comment| %>
-    <hr>
-    <h4><strong><%=link_to comment.user.username, comment.user%>:</strong></h4><br>
-    <p><%= comment.body %></p>
-    <br>
-    <!-- logic for button edits/deletes -->
-    <% if comment.user == current_user %>
-      <!-- edit button -->
-    <% end %>
-    <% if comment.user == current_user || @workout.user == current_user %>
-      <a role="button" href="<%=workout_comment_path(@workout, comment)%>" data-method="delete" class="btn btn-light">Delete this comment</a>
-    <% end %>
-    <hr>
-  <% end %>
-<% end %>
-
+<!-- Start buttons -->
 <div class="btn-group-sm" role="group">
   <% if @workout.user == current_user %>
     <a href="<%=edit_workout_path(@workout) %>" role="button" class="btn btn-secondary">Edit this workout</a>
@@ -38,7 +10,37 @@
   <% if @workout.user == current_user || current_user.friends.include?(@workout.user) %>
     <a role="button" href="<%=new_workout_comment_path(@workout)%>" class="btn btn-secondary">Comment on this workout</a>
   <% end %>
-  
   <a href="<%=workouts_path %>" role="button" class="btn btn-secondary">Access all your workouts</a>
 </div>
+<br>
+<!-- End Buttons -->
 
+<div class="mb-3">
+  <% @workout.exercise_workouts.each do |e_w| %>
+    <% exercise = e_w.exercise %>
+    <%= link_to exercise.name, exercise %>
+    <%= "Reps: #{e_w.reps} |" if e_w.reps %>
+    <%= "Weight: #{e_w.weight} |" if e_w.weight %>
+    <%= "Duration: #{e_w.duration} mins |" if e_w.duration %>
+    <%= "Distance: #{e_w.distance} |" if e_w.distance %>
+    <br>
+  <% end %>
+</div>
+
+
+
+<!-- comments stuff here  -->
+
+<div class="mb-3">
+  <% if @workout.comments.length > 0 %>
+  <hr>
+    <h4>Comments</h4>
+    <% @workout.comments.each do |comment| %>
+      <p>@<strong><%=link_to comment.user.username, comment.user%></strong>: <%= comment.body %>
+      <!-- logic for button edits/deletes -->
+      <% if comment.user == current_user || @workout.user == current_user %>
+        <a role="button" href="<%=workout_comment_path(@workout, comment)%>" data-method="delete" class="btn btn-outline-danger btn-sm">Delete</a>
+      <% end %></p>
+    <% end %>
+  <% end %>
+</div>

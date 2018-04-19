@@ -6,34 +6,68 @@
   <% end %>
 <% end %>
 
-<%= form_for @workout do |f| %>
-  <%= f.label :name %> of workout:
-  <%= f.text_field :name %> <br><br>
-  <%= f.label :day %>
-  <%= f.date_field :day %><br><br>
+<%= form_for @workout, class:"form-group" do |f| %>
+  <div class="row">
+    <div class="col-md-6 mb-3">
+      <%= f.label :name %>
+      <%= f.text_field :name, class: "form-control" %>
+    </div>
 
-  <%= f.fields_for :exercise_workouts do |i| %>
-    <% if i.object.persisted? %>
-      <% category = i.object.exercise.category %>
-      <h4><%= i.object.exercise.name %></h4>
-      <% if category == "strength" %>
-        <%= i.label :reps %>
-        <%= i.text_field :reps, placeholder: "# of reps" %>
-        <%= i.label :weight %>
-        <%= i.text_field :weight, placeholder: "weight in lbs" %>
-        <%= i.label :duration %>
-        <%= i.text_field :duration, placeholder: "time in mins" %>
-      <% elsif category == "cardio" %>
-        <%= i.label :distance %>
-        <%= i.text_field :distance, placeholder: "distance in km" %>
-        <%= i.label :duration %>
-        <%= i.text_field :duration, placeholder: "time in mins" %>
+    <div class="col-md-6 mb-3">
+      <%= f.label :day %>
+      <%= f.date_field :day, class: "form-control" %>
+    </div>
+  </div>
+
+  <h3>Strength</h3>
+  <div class="row">
+    <%= f.fields_for :exercise_workouts, class:"form-group" do |i| %>
+      <% if i.object.persisted? %>
+        <% category = i.object.exercise.category %>
+
+        <% if category == "strength" %>
+          <div class="col-md-3">
+            <div class="card mb-3 box-shadow">
+              <div class="card-body">
+                <h5><%= i.object.exercise.name %></h5>
+                <%= i.label :reps %>
+                <%= i.text_field :reps, placeholder: "# of reps", class: "form-control" %>
+
+                <%= i.label :weight %>
+                <%= i.text_field :weight, placeholder: "weight in lbs", class: "form-control" %>
+
+                <%= i.label :duration %>
+                <%= i.text_field :duration, placeholder: "time in mins", class: "form-control" %>
+              </div>
+            </div>
+          </div>
+          <% end %>
+        <% end %>
       <% end %>
-    <% end %>
-    <br>
-  <% end %>
-  <br>
-  <%= f.submit class: "btn btn-primary" %>
+    </div>
 
+    <h3>Cardio</h3>
+    <div class="row">
+      <%= f.fields_for :exercise_workouts, class:"form-group" do |i| %>
+        <% if i.object.persisted? %>
+          <% category = i.object.exercise.category %>
+          <% if category == "cardio" %>
+            <div class="col-md-3">
+              <div class="card mb-3 box-shadow">
+                <div class="card-body">
+                  <h5><%= i.object.exercise.name %></h5>
+                  <%= i.label :distance %>
+                  <%= i.text_field :distance, placeholder: "distance in km", class: "form-control" %>
 
+                  <%= i.label :duration %>
+                  <%= i.text_field :duration, placeholder: "time in mins", class: "form-control" %>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
+      <% end %>
+    </div>
+    <%= f.submit class: "btn btn-primary" %>
+  </div>
 <% end %>

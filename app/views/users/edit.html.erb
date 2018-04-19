@@ -10,25 +10,56 @@
 <% end %>
 
 <%= form_for @user, url: user_path, html: { multipart: true } do |f| %>
-  <%= f.file_field :avatar %><br>
+  <div class="mb-3">
+    <%= f.label :avatar %><br>
+    <label class="btn btn-secondary btn-sm">
+      Choose File
+      <span style="display:none;">
+        <%= f.file_field :avatar %>
+      </span>
+    </label>
+  </div>
 
-  <%= f.label :first_name %>
-  <%= f.text_field :first_name %><br>
-  <%= f.label :last_name %>
-  <%= f.text_field :last_name %><br>
+  <div class="row">
+    <div class="col-md-6 mb-3">
+      <%= f.label :first_name %>
+      <%= f.text_field :first_name, class: "form-control" %>
+    </div>
 
-  <%= f.label :username %>
-  <%= f.text_field :username %><br>
+    <div class="col-md-6 mb-3">
+      <%= f.label :last_name %>
+      <%= f.text_field :last_name, class: "form-control" %>
+    </div>
+  </div>
 
-  <%= f.label :email %>
-  <%= f.text_field :email %><br>
+  <div class="mb-3">
+    <%= f.label :username %>
+    <%= f.text_field :username, class: "form-control" %>
+  </div>
 
-  <%= f.label :height %>
-  <%= f.collection_select :height, @heights, :to_s, :to_s %><br>
-  <%= f.label :weight %>
-  <%= f.number_field :weight %><br>
-  <%= f.label :age %>
-  <%= f.number_field :age %><br>
+  <div class="mb-3">
+    <%= f.label :email %>
+    <%= f.text_field :email, class: "form-control" %>
+  </div>
 
-  <%= f.submit class:"btn btn-primary" %>
+  <div class="row">
+    <div class="col-md-4 mb-3">
+      <%= f.label :height %><br>
+      <%= f.collection_select :height, @heights, :to_s, :to_s, { :include_blank => true }, {class: 'form-control', placeholder: 'Choose Height'} %>
+    </div>
+
+    <div class="col-md-4 mb-3">
+      <%= f.label :weight %>
+      <%= f.number_field :weight, class: "form-control" %>
+    </div>
+
+    <div class="col-md-4 mb-3">
+      <%= f.label :age %>
+      <%= f.number_field :age, class: "form-control" %>
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <%= f.submit class:"btn btn-primary" %>
+  </div>
 <% end %>

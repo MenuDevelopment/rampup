@@ -22,6 +22,10 @@
  padding: 20px;
 }
 
+.btn-primary-outline {
+  background-color: transparent;
+  border-color: #ccc;
+}
 
 .image-circle{
     border-radius: 50%;

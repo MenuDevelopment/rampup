@@ -1,32 +1,90 @@
+<div class="container-fluid" >
 <h1><%= current_user.first_name %>, here are all of your workouts!</h1>
 <a role="button" href="<%=new_workout_path %>" class="btn btn-primary">New Workout</a>
 
 <hr>
 <%if current_user.workouts.count > 0%>
-  Insights:
+<p align='center'> Stats </p>
+  <div class="container-fluid" data-toggle="collapse">
+    <div class="col-md-12 col-xs-12" align="center" data-toggle="collapse">
+      	<div class="btn-group btn-group-justified" align-items-center>
+              <div class="btn-group" onclick="#">
+                  <button type="button" class="btn btn-primary-outline" data-toggle="collapse">
+                      <span class="glyphicon glyphicon-user" data-toggle="collapse"></span>
+      			    <h4><%= current_user.total_workouts %></h4>
+                <p># workouts </p>
+                  </button>
+              </div>
+              <div class="btn-group" onclick="#" data-toggle="collapse">
+                  <button type="button" class="btn btn-primary-outline" data-toggle="collapse">
+                      <span class="glyphicon glyphicon-time" data-toggle="collapse"></span>
+      			    <h4><%= current_user.total %></h4>
+                <p># total time (mins)</p>
+                  </button>
+              </div>
+              <div class="btn-group" onclick="#" data-toggle="collapse">
+                  <button type="button" class="btn btn-primary-outline" data-toggle="collapse">
+                      <span class="glyphicon glyphicon-usd" data-toggle="collapse"></span>
+                      <h4><%= current_user.cardio_by_percentage %></h4>
+                      <p> % cardio </p>
+                  </button>
+              </div>
+              <div class="btn-group" onclick="#" data-toggle="collapse">
+                  <button type="button" class="btn btn-primary-outline" data-toggle="collapse">
+                      <span class="glyphicon glyphicon-cog"></span>
+                      <h4><%= current_user.strength_by_percentage %></h4>
+                      <p> % strength </p>
+                  </button>
+              </div>
+              <div class="btn-group" onclick="#" data-toggle="collapse">
+                  <button type="button" class="btn btn-primary-outline" data-toggle="collapse">
+                      <span class="glyphicon glyphicon-question-sign" data-toggle="collapse"></span>
+                 <h4><%= current_user.favouritexercise.name %></h4>
+                 <p> Fav Ex </p>
+                  </button>
+              </div>
+              <div class="btn-group" onclick="#" data-toggle="collapse">
+                  <button type="button" class="btn btn-primary-outline" data-toggle="collapse">
+                      <span class="glyphicon glyphicon-question-sign" data-toggle="collapse"></span>
+                 <h4><%= current_user.avg_duration %></h4>
+                 <p> Avg Time Per Workout </p>
+                  </button>
+              </div>
+          </div>
+  	</div>
+  </div>
+  </div>
   <br>
-  Total # workouts: <b> <%= current_user.workouts.count %> </b>|
-  Cardio %: <b><%= current_user.cardio_by_percentage %> </b>|
-  Strength %: <b><%= current_user.strength_by_percentage %> </b>|
 
-  Your Favourite Exercise: <b><%= current_user.favouritexercise.name %></b>|
-  Average Time Spent Per Workout: <b><%= current_user.avg_duration %> </b> mins
 <% else %>
   You have none, create a workout today!
 <%end%>
 
 <hr>
 
-<ul>
-  <% current_user.workouts.each do |workout| %>
-    <% day = workout.day.strftime("%m/%d/%Y") if workout.day %>
-    <b><%= link_to "#{workout.name.capitalize}", workout_path(workout) %></b>
-    <br>
-    Date Completed: <%= "#{day} " %>
-    <br>
-    Exercises Completed:  <% workout.exercises.each do |exercise| %>
-      <%= link_to exercise.name, exercise %>
-    <% end %>
-    <hr>
-  <% end %>
-</ul>
+<div class="container">
+ <div class='row'>
+   <% current_user.workouts.each do |workout| %>
+     <div class='col-md-3'>
+       <div class='card mb-3 box-shadow'>
+         <div class="card-body">
+           <h5 class="card-text"><%= link_to workout.name.capitalize, workout_path(workout) %> </h5>
+             <% day = workout.day.strftime("%m/%d/%Y") if workout.day %>
+             <p><b>Date Completed: </b><%= "#{day} " %>
+             <b><br>Comments: </b> <%= workout.comments.count %></p>
+             <b> </b> <% workout.exercises.each do |exercise| %>
+                <%= link_to exercise.name, exercise %>
+             <% end %>
+           <div class="d-flex justify-content-between align-items-center">
+             <div class="btn-group">
+               </p>
+             </div>
+           </div>
+         </div>
+       </div>
+     </div>
+   <% end %>
+ </div>
+
+
+</div>

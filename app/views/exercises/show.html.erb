@@ -1,10 +1,9 @@
 <br>
-<br>
 
-<h3><b><%= @exercise.name%></b><h3>
+<h3><b><%= @exercise.name%></b></h3>
 <hr>
-Category:  <%= @exercise.category.capitalize %> |   Description: <%= @exercise.description %>
-<br>
+<b><h5><%= @exercise.category.capitalize %> Workout</b></h5>
+<p><%= @exercise.description %></p>
 <hr>
 
 <iframe width="560" height="315" src="<%= @exercise.video_url %>"</%>" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>

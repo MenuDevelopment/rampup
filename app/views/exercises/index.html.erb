@@ -1,18 +1,18 @@
 <h1>Exercises</h1>
 
 <br>
+<div class="container">
+  <div class='row'>
+    <% @exercises.each do |ex| %>
+        <div class='col-md-12'>
+          <div class='card mb-3 box-shadow'>
+            <div class="card-body">
+              <h5 class="card-text"><%= link_to ex.name, ex %></h5>
+              <p><%= ex.description %></p>
+            </div>
+          </div>
+        </div>
+      <% end %>
 
-
-<div class=.four-ul>
-  <ul>
-<% @exercises.each do |exercise| %>
-
-<b><%= link_to "#{exercise.name}", exercise_path(exercise) %></b>
-<br>
-Description: <%= "#{exercise.description} " %>
-<br>
-Exercises Category:  <%= exercise.category.capitalize %>
-<hr>
-<% end %>
-</ul>
+  </div>
 </div>

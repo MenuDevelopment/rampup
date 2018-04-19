@@ -12,7 +12,7 @@
 <%= form_for @user, url: user_path, html: { multipart: true } do |f| %>
   <div class="mb-3">
     <%= f.label :avatar %><br>
-    <label class="btn btn-primary btn-sm">
+    <label class="btn btn-secondary btn-sm">
       Choose File
       <span style="display:none;">
         <%= f.file_field :avatar %>

@@ -1,22 +1,22 @@
 class CommentsController < ApplicationController
   before_action :require_logged_in, except: [:index]
-  before_action :require_self_or_friendship, except [:index]
-  before_action :find_article!
+  before_action :find_workout
+  before_action :require_self_or_friendship, except: [:index]
+
 
   def index
     @comments = @workout.comments.order(created_at: :desc)
   end
 
   def new
-
-
+    @comment = @workout.comments.new
   end
 
   def create
     @comment = @workout.comments.new(comment_params)
     @comment.user = current_user
     if @comment.save
-      redirect_to @comment
+      redirect_to @workout
     else
       flash[:errors] = @comment.errors.full_messages
       redirect_to new_workout_comment_path
@@ -30,8 +30,8 @@ class CommentsController < ApplicationController
     return head(:forbidden) unless user == current_user || current_user.friends.include?(user)
   end
 
-  def find_article!
-    @workout = Workout.find(params[:article_id])
+  def find_workout
+    @workout = Workout.find(params[:workout_id])
   end
 
   def set_comment

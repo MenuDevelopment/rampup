@@ -12,8 +12,22 @@
   <br>
 <% end %>
 <br>
+<!-- comments stuff here  -->
+<% if @workout.comments.length > 0 %>
+  <% @workout.comments.each do |comment| %>
+    <hr>
+    <h4><strong><%=comment.user.username%>:</strong></h4><br>
+    <p><%= comment.body %></p>
+    <hr>
+  <% end %>
+<% end %>
+
 <% if @workout.user == current_user %>
   <a role="button" href="<%=edit_workout_path(@workout) %>" class="btn btn-light">Edit this workout</a>
+<% end %>
+
+<% if @workout.user == current_user || current_user.friends.include?(@workout.user) %>
+  <a role="button" href="<%=new_workout_comment_path(@workout)%>" class="btn btn-light">Comment on this workout</a>
 <% end %>
 
 

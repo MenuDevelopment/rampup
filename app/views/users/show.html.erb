@@ -5,7 +5,7 @@
               <%= image_tag @user.avatar.url(:medium) %>
             <% end %>
           </h1>
-          <h1 class="lead font-weight-normal"><%= @user.full_name %></h1>
+          <h1><%= @user.full_name %></h1>
           <% if @user == current_user %>
           <a class="btn btn-primary btn-sm" href="<%= edit_user_path %>"> Edit Acount</a>
           <a class="btn btn-primary btn-sm" href="<%= new_workout_path %>"> Create Workout</a>
@@ -135,6 +135,7 @@
 <div class="container">
 <div class='row'>
 <% if @user.friendships != [] %>
+<div class="col-md-3 mb-3">
   <h3>Following:</h3>
     <% end %>
     <ul>
@@ -142,14 +143,18 @@
         <li><%= link_to f.friend.username, f.friend %></li>
       <% end %>
     </ul>
+</div>
+
 
 <% if @user.inverse_friends != [] %>
+<div class="col-md-3 mb-3">
   <h3>Followers:</h3>
     <ul>
       <% @user.inverse_friends.each do |f| %>
         <li><%= link_to f.username, f %></li>
       <% end %>
     </ul>
+  </div>
 <% end %>
 </div>
 </div>

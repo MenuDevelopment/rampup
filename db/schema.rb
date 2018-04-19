@@ -41,6 +41,7 @@ ActiveRecord::Schema.define(version: 20180419132056) do
     t.string "category"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "video_url"
   end
 
   create_table "friendships", force: :cascade do |t|

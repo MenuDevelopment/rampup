@@ -1,14 +1,27 @@
-<h1>All Users</h1>
+<h1>All Users</h1><br/>
 
-<% if flash[:notice] %>
-  <h3><%= flash[:notice] %></h3>
-<% end %>
-
-
-<ul>
-  <% @users.each do |user| %>
-    <% if user.username != current_user.username %>
-      <li><%= link_to user.username, user %><% if !current_user.friends.include?(user) %> - <%= link_to "Follow", friendships_path(:friend_id => user), :method => :post %><% end %></li>
+<div class="container">
+  <div class='row'>
+    <% @users.each do |user| %>
+      <% unless user.username == current_user.username %>
+        <div class='col-md-3'>
+          <div class='card mb-3 box-shadow'>
+            <a href="users/<%= user.id %>"><img src="<%= user.picture %>", height="100%", width="100%", display: block, class: img-rounded></a>
+            <div class="card-body">
+              <h5 class="card-text">@<%= link_to user.username, user %></h5>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <% if current_user.friends.include?(user) %>
+                    <%= link_to "Unfollow", friendship_path(user), :method => :delete, :class => "btn btn-sm btn-outline-secondary"%>
+                  <% elsif user.username != current_user.username %>
+                    <%= link_to "Follow", friendships_path(:friend_id => user), :method => :post, :class => "btn btn-sm btn-outline-secondary"%>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
     <% end %>
-  <% end %>
-</ul>
+  </div>
+</div>

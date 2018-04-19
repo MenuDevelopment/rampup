@@ -82,7 +82,7 @@
 <% @user.friends.collect do |friend| %>
 <div class='col-md-3'>
     <div class='card mb-3 box-shadow' bg-light text-dark>
-        <%= image_tag friend.picture, class: "img-thumbnail"%>
+        <%= image_tag "#{friend.picture if friend.picture}", class: "img-thumbnail"%>
     <div class="card-body bg-light text-dark>
       <h3 class="card-text"> <%= link_to friend.username.capitalize, user_path(friend)%> </h3>
         <p> Latest Workout:

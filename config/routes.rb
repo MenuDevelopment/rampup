@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   resources :gyms
-  resources :workouts
+  resources :workouts do
+    resources :comments, only: [:new, :create, :index, :destroy]
+  end
   resources :exercises
   resources :users, only: [:index, :show, :create, :edit, :update, :destroy]
   resources :friendships

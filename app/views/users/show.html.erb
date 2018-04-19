@@ -1,5 +1,11 @@
 <h1><%= @user.full_name %></h1>
-<%= image_tag @user.avatar.url(:medium) %><br><br>
+<% if @user.picture %>
+  <%= image_tag @user.picture %>
+<% else %>
+  <%= image_tag @user.avatar.url(:medium) %>
+<% end %>
+
+<br><br>
 <% if @user == current_user %>
   <a role="button" href="<%= edit_user_path %>" class="btn btn-primary btn-sm">Edit Account</a>
 

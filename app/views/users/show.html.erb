@@ -163,7 +163,6 @@
 
 
     <a role="button" href="<%= friendship_path %>" data-method="delete" class="btn btn-light">Unfollow</a>
-    <a role="button" href="<%= user_path(current_user) %>" data-method="delete" class="btn btn-light">Go Back</a>
   <% else %>
     <a role="button" href="<%= friendships_path(friend_id: @user) %>" data-method="post" class="btn btn-light">Follow</a>
   <% end %>

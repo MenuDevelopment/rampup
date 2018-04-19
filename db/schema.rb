@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180419115832) do
+ActiveRecord::Schema.define(version: 20180419132106) do
+
+  create_table "comments", force: :cascade do |t|
+    t.text "body"
+    t.integer "user_id"
+    t.integer "workout_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_comments_on_user_id"
+    t.index ["workout_id"], name: "index_comments_on_workout_id"
+  end
 
   create_table "exercise_workouts", force: :cascade do |t|
     t.integer "duration"
@@ -31,6 +41,7 @@ ActiveRecord::Schema.define(version: 20180419115832) do
     t.string "category"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "video_url"
   end
 
   create_table "friendships", force: :cascade do |t|

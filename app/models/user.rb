@@ -18,6 +18,7 @@ class User < ApplicationRecord
   has_many :exercise_workouts, through: :workouts
   has_many :memberships
   has_many :gyms, through: :memberships
+  has_many :comments
   has_attached_file :avatar, styles: { medium: "300x300>", thumb: "100x100>" }
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\z/
 

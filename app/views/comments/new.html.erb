@@ -1,0 +1,7 @@
+<h3> Commenting on workout: <strong><%= @workout.name  %></strong></h2>
+<%= form_for [@workout, @comment] do |f|%>
+  <%= f.label :body %>
+  <%= f.text_area :body %>
+  <br>
+  <%= f.submit %>
+<% end %>

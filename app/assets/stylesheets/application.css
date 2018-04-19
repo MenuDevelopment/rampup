@@ -21,3 +21,27 @@
  background: #d8dbdf;
  padding: 20px;
 }
+
+.btn-primary-outline {
+  background-color: transparent;
+  border-color: #ccc;
+}
+
+.image-circle{
+    border-radius: 50%;
+    width: 175px;
+    height: 175px;
+    border: 4px solid #FFF;
+    margin: 10px;
+}
+
+.product-device::before {
+    position: absolute;
+    top: 10%;
+    right: 10px;
+    bottom: 10%;
+    left: 10px;
+    content: "";
+    background-image: url("https://www.sculptfitnesstraining.com/wp-content/uploads/2016/12/sculpt-fitness-background.jpg");
+    border-radius: 5px;
+}

@@ -2,6 +2,7 @@ class Workout < ApplicationRecord
   belongs_to :user
   has_many :exercise_workouts
   has_many :exercises, through: :exercise_workouts
+  has_many :comments, dependent: :destroy
   accepts_nested_attributes_for :exercise_workouts, allow_destroy: true
 
   def sort_exercises

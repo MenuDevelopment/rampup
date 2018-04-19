@@ -12,9 +12,33 @@
   <br>
 <% end %>
 <br>
+
+<!-- comments stuff here  -->
+<% if @workout.comments.length > 0 %>
+  <% @workout.comments.each do |comment| %>
+    <hr>
+    <h4><strong><%=link_to comment.user.username, comment.user%>:</strong></h4><br>
+    <p><%= comment.body %></p>
+    <br>
+    <!-- logic for button edits/deletes -->
+    <% if comment.user == current_user %>
+      <!-- edit button -->
+    <% end %>
+    <% if comment.user == current_user || @workout.user == current_user %>
+      <a role="button" href="<%=workout_comment_path(@workout, comment)%>" data-method="delete" class="btn btn-light">Delete this comment</a>
+    <% end %>
+    <hr>
+  <% end %>
+<% end %>
+
 <div class="btn-group-sm" role="group">
   <% if @workout.user == current_user %>
     <a href="<%=edit_workout_path(@workout) %>" role="button" class="btn btn-secondary">Edit this workout</a>
   <% end %>
+  <% if @workout.user == current_user || current_user.friends.include?(@workout.user) %>
+    <a role="button" href="<%=new_workout_comment_path(@workout)%>" class="btn btn-secondary">Comment on this workout</a>
+  <% end %>
+  
   <a href="<%=workouts_path %>" role="button" class="btn btn-secondary">Access all your workouts</a>
 </div>
+

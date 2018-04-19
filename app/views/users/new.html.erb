@@ -37,28 +37,30 @@
       <%= f.text_field :email, class: "form-control" %>
     </div>
 
-    <div class="mb-3">
-      <%= f.label :password %>
-      <%= f.password_field :password, class: "form-control" %>
-    </div>
+    <div class="row">
+      <div class="col-md-6 mb-3">
+        <%= f.label :password %>
+        <%= f.password_field :password, class: "form-control" %>
+      </div>
 
-    <div class="mb-3">
-      <%= f.label :password_confirmation %>
-      <%= f.password_field :password_confirmation, class: "form-control" %>
+      <div class="col-md-6 mb-3">
+        <%= f.label :password_confirmation %>
+        <%= f.password_field :password_confirmation, class: "form-control" %>
+      </div>
     </div>
 
     <div class="row">
-      <div class="col-md-2 mb-3">
+      <div class="col-md-4 mb-3">
         <%= f.label :height %><br>
-        <%= f.collection_select :height, @heights, :to_s, :to_s, class: "custom-select d-block w-100" %>
+        <%= f.collection_select :height, @heights, :to_s, :to_s, { :include_blank => true }, {class: 'form-control', placeholder: 'Choose Height'} %>
       </div>
 
-      <div class="col-md-5 mb-3">
+      <div class="col-md-4 mb-3">
         <%= f.label :weight %>
         <%= f.number_field :weight, class: "form-control" %>
       </div>
 
-      <div class="col-md-5 mb-3">
+      <div class="col-md-4 mb-3">
         <%= f.label :age %>
         <%= f.number_field :age, class: "form-control" %>
       </div>

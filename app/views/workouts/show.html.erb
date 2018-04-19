@@ -30,9 +30,10 @@
 
 
 <!-- comments stuff here  -->
-<hr>
+
 <div class="mb-3">
   <% if @workout.comments.length > 0 %>
+  <hr>
     <h4>Comments</h4>
     <% @workout.comments.each do |comment| %>
       <p>@<strong><%=link_to comment.user.username, comment.user%></strong>: <%= comment.body %>

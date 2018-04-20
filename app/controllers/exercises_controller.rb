@@ -1,4 +1,5 @@
 class ExercisesController < ApplicationController
+  before_action :require_logged_in
 
 def index
   @exercises = Exercise.all

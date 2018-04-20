@@ -115,8 +115,15 @@
            <h5 class="card-text"><%= link_to workout.name.capitalize, workout_path(workout) %> </h5>
              <% day = workout.day.strftime("%m/%d/%Y") if workout.day %>
              <p>Date Completed: <%= "#{day} " %>
-             StengthCount: <%= @user.strengthcount %>
-             CardioCount: <%= @user.cardiocount %></p>
+             StengthCount: <% x = workout.exercises.select do |exercise| %>
+                            <% exercise.category == "strength" %>
+                            <% end %>
+                   <%= x.count %>
+             CardioCount: <% x = workout.exercises.select do |exercise| %>
+                            <% exercise.category == "cardio" %>
+                            <% end %>
+                   <%= x.count %>
+                 </p>
            <div class="d-flex justify-content-between align-items-center">
              <div class="btn-group">
                <button type="button" class="btn btn-sm btn-outline-secondary" href= "<%= workout_path(workout)%>">View</button>

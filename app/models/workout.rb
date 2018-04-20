@@ -13,3 +13,14 @@ class Workout < ApplicationRecord
     end
   end
 end
+
+
+def strength_per_workout
+   self.exercises.select do |exercise|
+    exercise.category == "strength"
+    end
+end
+
+def strengthcount_per_workout
+  self.strength_per_workout.count
+end

@@ -1,5 +1,10 @@
 <div class="container-fluid" align="center">
-  <h1>All Users</h1>
+  <%if @users.size == 0 %>
+    <h1>No results, please try a different search.</h1>
+  <%elsif @users.size > 1 %>
+    <h1>All Users</h1>
+  <% end %>
+
   <br>
 
   <div class='row'>

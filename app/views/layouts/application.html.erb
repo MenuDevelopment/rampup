@@ -34,13 +34,18 @@
               <a class="nav-link" href="<%= users_path %>">Users</a>
             </li>
           </ul>
+
           <% if logged_in? %>
+            <%= form_tag users_path, method: 'get', class: 'form-inline my-2 my-lg-0', role: 'search' do %>
+              <%= text_field_tag :q, params[:q], size: 20, placeholder: "Search by username", class: "form-control mr-sm-1" %>
+              <button type="submit" class="btn btn-outline-light my-3 my-sm-0 mr-sm-3">Search</button>
+            <% end %>
             <%= form_tag logout_path, class: "form-inline my-2 my-lg-0" do %>
-              <input type=submit value='logout' class='btn btn-outline-light my-2 my-sm-0'>
+            <button type="submit" class='btn btn-light my-4 my-sm-0'>Logout</button>
             <% end %>
           <% else %>
             <%= form_tag '/login', method: 'get', class: "form-inline my-2 my-lg-0" do %>
-              <input type=submit value='login' class='btn btn-outline-light my-2 my-sm-0'>
+            <button type="submit" class='btn btn-outline-light my-2 my-sm-0'>Login</button>
             <% end %>
           <% end %>
         </div>

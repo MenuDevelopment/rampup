@@ -45,3 +45,16 @@
     background-image: url("https://www.sculptfitnesstraining.com/wp-content/uploads/2016/12/sculpt-fitness-background.jpg");
     border-radius: 5px;
 }
+
+.container .jumbotron {
+ border-radius: 0px;
+}
+
+.topnav input[type=text] {
+    float: right;
+    padding: 6px;
+    border: none;
+    margin-top: 8px;
+    margin-right: 16px;
+    font-size: 17px;
+}

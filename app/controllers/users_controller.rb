@@ -5,7 +5,11 @@ class UsersController < ApplicationController
 
   def index
     @users = User.all
+    if params[:q]
+      @users = @users.select {|user| user.username == params[:q].downcase}
+    end 
   end
+
 
   def home
     @user = current_user

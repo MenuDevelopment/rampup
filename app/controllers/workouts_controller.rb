@@ -34,7 +34,6 @@ class WorkoutsController < ApplicationController
     if @workout.valid?
       redirect_to @workout
     else
-      byebug
       flash[:errors] = @workout.errors.full_messages
       redirect_to edit_workout_path(@workout)
     end

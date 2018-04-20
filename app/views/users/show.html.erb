@@ -84,7 +84,7 @@
 
   <% if @user == current_user %>
     <div class="col-md-12 col-xs-12">
-      <h3> Followee's Workouts </h3>
+      <h3> Followee's Workouts </h3><br>
       <div class='row'>
         <% @user.friends.collect do |friend| %>
           <div class='col-md-3'>
@@ -111,7 +111,7 @@
 
 
   <div class="container">
-    <h3>Latest Workouts</h3>
+    <h3>Latest Workouts</h3><br>
       <div class='row'>
         <% @user.workouts.each do |workout| %>
          <div class='col-md-3'>
@@ -119,9 +119,9 @@
            <div class="card-body" align="left">
              <h5 class="card-text"><%= link_to workout.name.capitalize, workout_path(workout) %> </h5>
                <% day = workout.day.strftime("%m/%d/%Y") if workout.day %>
-               <p>Date Completed: <%= "#{day} " %>
-               StengthCount: <%= @user.strengthcount %>
-               CardioCount: <%= @user.cardiocount %></p>
+               <p>Date Completed: <%= "#{day} " %><br>
+               Stength Count: <%= @user.strengthcount %><br>
+               Cardio Count: <%= @user.cardiocount %></p>
                <a role="button" class="btn btn-outline-secondary btn-sm" href= "<%= workout_path(workout) %>">View</a>
            </div>
          </div>

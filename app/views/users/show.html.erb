@@ -24,7 +24,7 @@
             <div class="btn-group" onclick="#">
               <button type="button" class="btn btn-primary-outline" data-toggle="collapse">
                 <span class="glyphicon glyphicon-user" data-toggle="collapse"></span>
-        			  <h4><%= current_user.total_workouts %></h4>
+        			  <h4><%= @user.total_workouts %></h4>
                 <p># workouts </p>
               </button>
             </div>
@@ -32,7 +32,7 @@
             <div class="btn-group" onclick="#" data-toggle="collapse">
               <button type="button" class="btn btn-primary-outline" data-toggle="collapse">
                 <span class="glyphicon glyphicon-time" data-toggle="collapse"></span>
-        			  <h4><%= current_user.total %></h4>
+        			  <h4><%= @user.total %></h4>
                 <p># total time (mins)</p>
               </button>
             </div>
@@ -40,7 +40,7 @@
             <div class="btn-group" onclick="#" data-toggle="collapse">
               <button type="button" class="btn btn-primary-outline" data-toggle="collapse">
                   <span class="glyphicon glyphicon-usd" data-toggle="collapse"></span>
-                  <h4><%= current_user.cardio_by_percentage %></h4>
+                  <h4><%= @user.cardio_by_percentage %></h4>
                   <p> % cardio </p>
               </button>
             </div>
@@ -48,7 +48,7 @@
             <div class="btn-group" onclick="#" data-toggle="collapse">
               <button type="button" class="btn btn-primary-outline" data-toggle="collapse">
                 <span class="glyphicon glyphicon-cog"></span>
-                <h4><%= current_user.strength_by_percentage %></h4>
+                <h4><%= @user.strength_by_percentage %></h4>
                 <p> % strength </p>
               </button>
             </div>
@@ -56,7 +56,7 @@
             <div class="btn-group" onclick="#" data-toggle="collapse">
               <button type="button" class="btn btn-primary-outline" data-toggle="collapse">
                 <span class="glyphicon glyphicon-question-sign" data-toggle="collapse"></span>
-                <h4><%= current_user.favouritexercise.name %></h4>
+                <h4><%= @user.favouritexercise.name %></h4>
                 <p> Fav Ex </p>
               </button>
             </div>
@@ -64,7 +64,7 @@
             <div class="btn-group" onclick="#" data-toggle="collapse">
               <button type="button" class="btn btn-primary-outline" data-toggle="collapse">
                 <span class="glyphicon glyphicon-question-sign" data-toggle="collapse"></span>
-                <h4><%= current_user.friends.count %></h4>
+                <h4><%= @user.friends.count %></h4>
                 <p> Following </p>
               </button>
             </div>
@@ -72,7 +72,7 @@
             <div class="btn-group" onclick="#" data-toggle="collapse">
               <button type="button" class="btn btn-primary-outline"data-toggle="collapse">
                 <span class="glyphicon glyphicon-question-sign" data-toggle="collapse"></span>
-                <h4><%= current_user.inverse_friends.count %></h4>
+                <h4><%= @user.inverse_friends.count %></h4>
                 <p> Followed By </p>
               </button>
             </div>

@@ -11,6 +11,10 @@
     <a role="button" href="<%=new_workout_comment_path(@workout)%>" class="btn btn-secondary">Comment on this workout</a>
   <% end %>
   <a href="<%=workouts_path %>" role="button" class="btn btn-secondary">Access all your workouts</a>
+  <% if @workout.user == current_user %>
+    <a href="<%=workout_path(@workout) %>" data-method = "delete" role="button" class="btn btn-outline-danger btn-sm">Delete this workout</a>
+  <% end %>
+
 </div>
 <br>
 <!-- End Buttons -->

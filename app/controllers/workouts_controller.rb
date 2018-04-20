@@ -1,6 +1,6 @@
 class WorkoutsController < ApplicationController
   before_action :require_logged_in
-  before_action :set_workout, only: [:show, :edit, :update]
+  before_action :set_workout, only: [:show, :edit, :update, :destroy]
 
   def index
     @workouts = Workout.all
@@ -36,6 +36,14 @@ class WorkoutsController < ApplicationController
     else
       flash[:errors] = @workout.errors.full_messages
       redirect_to edit_workout_path(@workout)
+    end
+  end
+
+  def destroy
+    if @workout
+      return head(:forbidden) unless @workout.user == current_user
+      @workout.destroy
+      redirect_to workouts_path
     end
   end
 

@@ -7,8 +7,6 @@
 
   <h1><%= @user.full_name %></h1>
 
-  <!-- IF USER PAGE BELONGS TO CURRENT_USER -->
-
   <% if @user == current_user %>
     <a class="btn btn-primary btn-sm" href="<%= edit_user_path %>"> Edit Acount</a>
     <a class="btn btn-primary btn-sm" href="<%= new_workout_path %>"> Create Workout</a>
@@ -86,13 +84,13 @@
 
   <% if @user == current_user %>
     <div class="col-md-12 col-xs-12">
-      <h3> Followee's Workouts </h3>
+      <h3> Followee's Workouts </h3><br>
       <div class='row'>
         <% @user.friends.collect do |friend| %>
           <div class='col-md-3'>
             <div class='card mb-3 box-shadow bg-light text-dark'>
               <%= image_tag "#{friend.picture if friend.picture}", class: "img-thumbnail"%>
-              <div class="card-body bg-light text-dark" >
+              <div class="card-body bg-light text-dark" align="left">
                 <h3 class="card-text"> <%= link_to friend.username.capitalize, user_path(friend)%> </h3>
                 <p>Most Recent Workout:
                 <% x = friend.workouts.last %><br>
@@ -113,23 +111,18 @@
 
 
   <div class="container">
-    <h3>Latest Workouts</h3>
+    <h3>Latest Workouts</h3><br>
       <div class='row'>
         <% @user.workouts.each do |workout| %>
          <div class='col-md-3'>
          <div class='card mb-3 box-shadow'>
-           <div class="card-body">
+           <div class="card-body" align="left">
              <h5 class="card-text"><%= link_to workout.name.capitalize, workout_path(workout) %> </h5>
                <% day = workout.day.strftime("%m/%d/%Y") if workout.day %>
-               <p>Date Completed: <%= "#{day} " %>
-               StengthCount: <%= @user.strengthcount %>
-               CardioCount: <%= @user.cardiocount %></p>
-             <div class="d-flex justify-content-between align-items-center">
-               <div class="btn-group">
-                 <button type="button" class="btn btn-sm btn-outline-secondary" href= "<%= workout_path(workout)%>">View</button>
-                 </p>
-               </div>
-             </div>
+               <p>Date Completed: <%= "#{day} " %><br>
+               Stength Count: <%= @user.strengthcount %><br>
+               Cardio Count: <%= @user.cardiocount %></p>
+               <a role="button" class="btn btn-outline-secondary btn-sm" href= "<%= workout_path(workout) %>">View</a>
            </div>
          </div>
        </div>
@@ -143,22 +136,20 @@
     <div class="btn-group btn-group-justified" align-items-center>
       <div class='row'>
         <% if @user.friendships != [] %>
-          <div class="col-md-6" >
-            <h3>Following:</h3>
-
-              <% @user.friendships.each do |f| %>
-                <%= link_to f.friend.username, f.friend %><br>
-              <% end %>
-
+          <div class="col-md-6">
+            <h3>Following</h3>
+            <% @user.friendships.each do |f| %>
+              <%= link_to f.friend.username, f.friend %><br>
+            <% end %>
           </div>
         <% end %>
 
         <% if @user.inverse_friends != [] %>
           <div class="col-md-6">
-            <h3>Followers:</h3>
-              <% @user.inverse_friends.each do |f| %>
-                <%= link_to f.username, f %><br>
-              <% end %>
+            <h3>Followers</h3>
+            <% @user.inverse_friends.each do |f| %>
+              <%= link_to f.username, f %><br>
+            <% end %>
           </div>
         <% end %>
       </div>

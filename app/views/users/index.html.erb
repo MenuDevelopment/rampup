@@ -1,6 +1,7 @@
-<h1>All Users</h1><br/>
+<div class="container-fluid" align="center">
+  <h1>All Users</h1>
+  <br>
 
-<div class="container">
   <div class='row'>
     <% @users.each do |user| %>
       <% unless user.username == current_user.username %>

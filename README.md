@@ -1,24 +1,20 @@
-# README
+# RAMPUP
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+RAMPUP is a social platform where users can create workouts, track progress and encourage each other.
 
-Things you may want to cover:
+## Technology Used
+- Built with Ruby on Rails and the MVC pattern
+- Configured auth with Bcrypt and Rails sessions
+- Used Bootstrap to design front end
 
-* Ruby version
+### Contributors Guide
 
-* System dependencies
+We are not taking contributions at this time.
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+### Created by
+Manuel Grullon, [Github](https://github.com/MenuDevelopment) <br>
+Patricia Wong, [Github](https://github.com/p-wong)
+<br>
+Rani Shah, [Github](https://github.com/ranishah76)
+<br>
+Adam Towers, [Github](https://github.com/AdamTowers)
